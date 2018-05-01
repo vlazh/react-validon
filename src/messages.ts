@@ -1,5 +1,5 @@
 /**
- * Template variables: {PROP}, {VALUE}
+ * Default template variables: {PROP}, {VALUE}
  */
 
 export default {
@@ -7,7 +7,6 @@ export default {
   required: 'Value is required.',
   oneOf: 'Value is not valid enum value.',
   email: 'Value is not valid email.',
-  equals: 'Value must be equals to {PROP2}.',
 
   number: {
     min: 'Value is less than minimum allowed value `{MIN}`.',
