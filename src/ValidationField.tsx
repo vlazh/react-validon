@@ -23,7 +23,7 @@ export default function validationField<P extends Props>({
   getValue,
   getValidators,
 }: Options<P> = {}) {
-  return <C extends React.ComponentClass<P>>(Component: C): React.StatelessComponent<P> => {
+  return <C extends React.ComponentType<P>>(Component: C): React.StatelessComponent<P> => {
     class ValidationField extends React.Component<P> {
       static displayName = `${validationField.name}(${Component.displayName ||
         Component.name ||
@@ -48,7 +48,7 @@ export default function validationField<P extends Props>({
       render() {
         // const { subscribe, unsubscribe, ...rest } = this.props;
         // Not using spread operator because of https://github.com/Microsoft/TypeScript/issues/17281
-        return <Component {...this.props} />;
+        return React.createElement<P>(Component, this.props);
       }
     }
 
