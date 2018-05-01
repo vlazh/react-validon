@@ -1,0 +1,15 @@
+# Output
+dist/
+
+# Temp and caches
+node_modules/
+.cache/
+.awcache/
+tmp
+*~
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.history/

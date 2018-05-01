@@ -1,0 +1,6 @@
+{
+  "extends": ["@vzh/configs/ts/react.tslint.json"],
+  "rules": {
+    "jsx-no-multiline-js": false
+  }
+}

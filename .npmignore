@@ -1,0 +1,10 @@
+.vscode/
+.history/
+.awcache/
+src/
+.gitignore
+.npmignore
+.prettierrc
+tsconfig.json
+tslint.json
+yarn.lock
