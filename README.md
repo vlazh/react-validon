@@ -2,9 +2,9 @@
 
 **React-validon** is a small, simple and flexible extensible validation library for React >= 16 based on [decorators](https://github.com/tc39/proposal-decorators).
 
-**React-validon** is independent of store and can work with [component state](https://reactjs.org/docs/faq-state.html), [Redux](https://redux.js.org/) and [MobX](https://github.com/mobxjs/mobx).
+**React-validon** is independent of store and can work with [local component state](https://reactjs.org/docs/faq-state.html), [Redux](https://redux.js.org/) and [MobX](https://github.com/mobxjs/mobx).
 
-## Component state example
+## Local component state example
 
 ```javascript
 // TODO
