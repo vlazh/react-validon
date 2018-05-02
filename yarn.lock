@@ -24,9 +24,9 @@
   dependencies:
     csstype "^2.2.0"
 
-"@vzh/configs@^0.66.0":
-  version "0.66.0"
-  resolved "https://registry.yarnpkg.com/@vzh/configs/-/configs-0.66.0.tgz#1a93ae1c849b693aa7d2bfdf20a2a436646d01fc"
+"@vzh/configs@^0.67.0":
+  version "0.67.0"
+  resolved "https://registry.yarnpkg.com/@vzh/configs/-/configs-0.67.0.tgz#502010093c791de8865ea64d35bbf3d1c7f37503"
 
 ansi-regex@^2.0.0:
   version "2.1.1"

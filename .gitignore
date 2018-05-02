@@ -1,5 +1,6 @@
 # Output
 dist/
+*.log
 
 # Temp and caches
 node_modules/
@@ -13,3 +14,5 @@ tmp
 *.iml
 .vscode/
 .history/
+
+examples/
