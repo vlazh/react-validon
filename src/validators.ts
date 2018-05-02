@@ -1,4 +1,4 @@
-import memoize from 'nano-memoize';
+import memoizeBase from 'nano-memoize';
 import messages from './messages';
 import { isEmptyObject } from './utils';
 
@@ -13,6 +13,8 @@ export interface Validator<V = any> {
   type: Type;
   message: string;
 }
+
+const memoize = <T>(fn: T): T => memoizeBase(fn, { vargs: true });
 
 export const required = memoize(
   (type: Type = Type.ERROR, message = messages.required): Validator => {
