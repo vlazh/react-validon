@@ -19,13 +19,13 @@ export interface Props extends Pick<State, 'subscribe' | 'unsubscribe'> {
  * By default, value and validators obtain from props.value and props.validators but you can
  * provide you own mechanism of obtain them through options: getValue(props), getValidators(props).
  */
-export default function validationField<P extends Props>({
+export default function validableField<P extends Props>({
   getValue,
   getValidators,
 }: Options<P> = {}) {
   return <C extends React.ComponentType<P>>(Component: C): React.StatelessComponent<P> => {
-    class ValidationField extends React.Component<P> {
-      static displayName = `${validationField.name}(${Component.displayName ||
+    class ValidableField extends React.Component<P> {
+      static displayName = `${validableField.name}(${Component.displayName ||
         Component.name ||
         (Component.constructor && Component.constructor.name) ||
         'Unknown'})`;
@@ -42,23 +42,23 @@ export default function validationField<P extends Props>({
 
       componentWillUnmount() {
         const { unsubscribe, name } = this.props;
-        unsubscribe(name);
+        name && unsubscribe(name);
       }
 
       render() {
         // const { subscribe, unsubscribe, ...rest } = this.props;
-        // Not using spread operator because of https://github.com/Microsoft/TypeScript/issues/17281
+        // Not used spread operator because of https://github.com/Microsoft/TypeScript/issues/17281
         return React.createElement<P>(Component, this.props);
       }
     }
 
     // Static fields from Component should be visible on the generated HOC
-    hoistNonReactStatics(ValidationField, Component);
+    hoistNonReactStatics(ValidableField, Component);
 
     return props => (
       <ValidableContext.Consumer>
         {({ subscribe, unsubscribe, validate, result }: State) => (
-          <ValidationField
+          <ValidableField
             {...props}
             subscribe={subscribe}
             unsubscribe={unsubscribe}

@@ -1,3 +1,3 @@
 export { default as validable } from './Validable';
-export { default as validationField } from './ValidationField';
+export { default as validableField } from './ValidableField';
 export * from './validators';
