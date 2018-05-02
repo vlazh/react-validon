@@ -61,8 +61,14 @@ export default function validable<P extends Props>() {
       private fields: Fields = {};
 
       private subscribe = (field: Field) => {
+        if (!field.name) {
+          console.warn(
+            'Validable fields with empty names will be ignored! You must specify unique field name.'
+          );
+          return;
+        }
         if (this.fields[field.name]) {
-          console.warn(`'${field.name}' already subscribed!`);
+          console.warn(`Validable field '${field.name}' already subscribed!`);
           return;
         }
         this.fields[field.name] = field;
@@ -70,7 +76,7 @@ export default function validable<P extends Props>() {
 
       private unsubscribe = (name: string) => {
         if (!this.fields[name]) {
-          console.warn(`'${name}' not subscribed!`);
+          console.warn(`Validable field '${name}' not subscribed!`);
           return;
         }
         delete this.fields[name];
