@@ -5633,9 +5633,9 @@ react-dom@^16.3.2:
     object-assign "^4.1.1"
     prop-types "^15.6.0"
 
-react-validon@^0.6.1:
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/react-validon/-/react-validon-0.6.1.tgz#388597ef962d1856f75e27e09a8b19dfd9bee603"
+react-validon@^0.6.2:
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/react-validon/-/react-validon-0.6.2.tgz#823e9fe5c9882b5f836777cd5575c2bccdd977a3"
   dependencies:
     hoist-non-react-statics "^2.5.0"
     nano-memoize "^1.0.0"
