@@ -1,0 +1,9 @@
+.error {
+  border-color: tomato;
+  outline-color: tomato;
+}
+
+.warn {
+  border-color: yellow;
+  outline-color: yellow;
+}
