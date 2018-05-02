@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import hoistNonReactStatics from 'hoist-non-react-statics';
-import { Validator } from './validators';
+import { Validator, Type } from './validators';
 
 export type Validators = Validator | Validator[] | undefined;
 
@@ -18,15 +19,24 @@ interface ValidableClass<P> {
   wrappedComponent: React.ComponentType<P>;
 }
 
+export interface ValidationResult {
+  error?: string;
+  type?: Type;
+}
+
+interface FieldValidationResults {
+  [P: string]: ValidationResult;
+}
+
 export interface Props {
-  isValid: string;
-  validationResult: {};
+  isValid: boolean;
+  validationResult: ValidationResult;
   validate: (fieldName: string, value: any) => boolean;
 }
 
 export interface State {
   isValid: boolean;
-  result: {};
+  result: ValidationResult;
   subscribe: (field: Field) => void;
   unsubscribe: (name: string) => void;
   validate: (fieldName: string, value: any) => boolean;
@@ -46,11 +56,13 @@ export const ValidableContext = React.createContext<State>({
   },
 });
 
+export const typePropTypes = PropTypes.oneOf(['ERROR', 'WARN', 'INFO']);
+
 /**
  * Provide props isValid, validationResult, validate.
  */
 export default function validable<P extends Props>() {
-  return <C extends React.ComponentClass<P>>(Component: C): C => {
+  return <C extends React.ComponentType<P>>(Component: C): C => {
     class Validable extends React.Component<P, State> {
       static displayName = `${validable.name}(${Component.displayName ||
         Component.name ||
@@ -85,7 +97,7 @@ export default function validable<P extends Props>() {
       private normalizeValidators = (validators: Validators) =>
         !validators || Array.isArray(validators) ? validators : [validators];
 
-      private validateField = ({ name, getValue, getValidators }: Field) => {
+      private validateField = ({ name, getValue, getValidators }: Field): ValidationResult => {
         const validators = this.normalizeValidators(getValidators());
         if (!validators) return {};
 
@@ -98,7 +110,7 @@ export default function validable<P extends Props>() {
         };
       };
 
-      private validateFields = (fieldName: string, value: any) => {
+      private validateFields = (fieldName: string, value: any): FieldValidationResults => {
         if (fieldName && value !== undefined) {
           return {
             [fieldName]: this.validateField({
@@ -117,7 +129,7 @@ export default function validable<P extends Props>() {
         }, {});
       };
 
-      private validate = (fieldName: string, value: any) => {
+      private validate = (fieldName: string, value: any): boolean => {
         const prevState = this.state;
         const result = {
           ...prevState.result,
@@ -137,21 +149,37 @@ export default function validable<P extends Props>() {
       };
 
       render() {
+        const component = React.createElement<P>(
+          Component,
+          /* tslint:disable-next-line:prefer-object-spread */
+          Object.assign({}, this.props, {
+            isValid: this.state.isValid,
+            validationResult: this.state.result,
+            validate: this.validate,
+          })
+        );
         return (
-          <ValidableContext.Provider value={this.state}>
-            <Component
-              {...this.props}
-              isValid={this.state.isValid}
-              validationResult={this.state.result}
-              validate={this.validate}
-            />
-          </ValidableContext.Provider>
+          <ValidableContext.Provider value={this.state}>{component}</ValidableContext.Provider>
         );
       }
     }
 
     // Static fields from Component should be visible on the generated HOC
     hoistNonReactStatics(Validable, Component);
+
+    const wrappedComponent = Validable.wrappedComponent as any;
+
+    (wrappedComponent.propTypes as Required<React.ValidationMap<Props>>) = {
+      isValid: PropTypes.bool.isRequired,
+      validationResult: PropTypes.objectOf(
+        PropTypes.shape({
+          error: PropTypes.string,
+          type: typePropTypes,
+        })
+      ).isRequired,
+      validate: PropTypes.func.isRequired,
+      ...wrappedComponent.propTypes,
+    };
 
     return Validable as C & ValidableClass<P> & typeof Validable;
   };
