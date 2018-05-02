@@ -53,6 +53,7 @@
   },
   "dependencies": {
     "hoist-non-react-statics": "^2.5.0",
+    "nano-memoize": "^1.0.0",
     "prop-types": "^15.6.1"
   },
   "peerDependencies": {

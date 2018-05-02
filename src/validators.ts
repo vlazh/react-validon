@@ -1,3 +1,4 @@
+import memoize from 'nano-memoize';
 import messages from './messages';
 import { isEmptyObject } from './utils';
 
@@ -7,120 +8,124 @@ export enum Type {
   INFO = 'INFO',
 }
 
-export interface Validator {
-  validator: (value: any, fieldName: string) => boolean;
+export interface Validator<V = any> {
+  validator: (value: V, fieldName: string) => boolean;
   type: Type;
   message: string;
 }
 
-export function required(type: Type = Type.ERROR, message = messages.required): Validator {
-  return {
-    validator: value => {
-      if (value == null) {
-        return false;
-      }
-
-      switch (typeof value) {
-        case 'string':
-          return value.length > 0;
-        case 'number':
-          return isFinite(value);
-        case 'object': {
-          if (Array.isArray(value)) {
-            return !!value.length;
-          }
-          // value.length for mobx ObservableArrays
-          // value.size for immutable structures
-          const length = value.length || value.size;
-          return length != null ? !!length : !isEmptyObject(value);
+export const required = memoize(
+  (type: Type = Type.ERROR, message = messages.required): Validator => {
+    return {
+      validator: value => {
+        if (value == null) {
+          return false;
         }
-        default:
-          return true;
-      }
-    },
-    type,
-    message,
-  };
-}
+
+        switch (typeof value) {
+          case 'string':
+            return value.length > 0;
+          case 'number':
+            return isFinite(value);
+          case 'object': {
+            if (Array.isArray(value)) {
+              return !!value.length;
+            }
+            // value.length for mobx ObservableArrays
+            // value.size for immutable structures
+            const length = value.length || value.size;
+            return length != null ? !!length : !isEmptyObject(value);
+          }
+          default:
+            return true;
+        }
+      },
+      type,
+      message,
+    };
+  }
+);
 
 /* Number */
 
-export function min(
-  minValue: any,
-  type: Type = Type.ERROR,
-  message = messages.number.min
-): Validator {
-  return {
-    validator: value => +value >= +minValue,
-    type,
-    message: message.replace(/{MIN}/, minValue.toString()),
-  };
-}
+export const min = memoize(
+  (minValue: number, type: Type = Type.ERROR, message = messages.number.min): Validator<number> => {
+    return {
+      validator: value => +value >= +minValue,
+      type,
+      message: message.replace(/{MIN}/, minValue.toString()),
+    };
+  }
+);
 
-export function max(
-  maxValue: any,
-  type: Type = Type.ERROR,
-  message = messages.number.max
-): Validator {
-  return {
-    validator: value => +value <= +maxValue,
-    type,
-    message: message.replace(/{MAX}/, maxValue.toString()),
-  };
-}
+export const max = memoize(
+  (maxValue: number, type: Type = Type.ERROR, message = messages.number.max): Validator<number> => {
+    return {
+      validator: value => +value <= +maxValue,
+      type,
+      message: message.replace(/{MAX}/, maxValue.toString()),
+    };
+  }
+);
 
 /* String */
 
-export function minLength(
-  minValue: any,
-  type: Type = Type.ERROR,
-  message = messages.string.minLength
-): Validator {
-  return {
-    validator: value => value == null || value.length >= +minValue,
-    type,
-    message: message.replace(/{MINLENGTH}/, minValue.toString()),
-  };
-}
+export const minLength = memoize(
+  (
+    minValue: number,
+    type: Type = Type.ERROR,
+    message = messages.string.minLength
+  ): Validator<string> => {
+    return {
+      validator: value => value == null || value.length >= +minValue,
+      type,
+      message: message.replace(/{MINLENGTH}/, minValue.toString()),
+    };
+  }
+);
 
-export function maxLength(
-  maxValue: any,
-  type: Type = Type.ERROR,
-  message = messages.string.maxLength
-): Validator {
-  return {
-    validator: value => value == null || value.length <= +maxValue,
-    type,
-    message: message.replace(/{MAXLENGTH}/, maxValue.toString()),
-  };
-}
+export const maxLength = memoize(
+  (
+    maxValue: number,
+    type: Type = Type.ERROR,
+    message = messages.string.maxLength
+  ): Validator<string> => {
+    return {
+      validator: value => value == null || value.length <= +maxValue,
+      type,
+      message: message.replace(/{MAXLENGTH}/, maxValue.toString()),
+    };
+  }
+);
 
-export function match(
-  regExp: RegExp,
-  type: Type = Type.ERROR,
-  message = messages.string.match
-): Validator {
-  return {
-    validator: value => {
-      if (!regExp) return false;
-      return value ? regExp.test(value) : true;
-    },
-    type,
-    message,
-  };
-}
+export const match = memoize(
+  (regExp: RegExp, type: Type = Type.ERROR, message = messages.string.match): Validator<string> => {
+    return {
+      validator: value => {
+        if (!regExp) return false;
+        return value ? regExp.test(value) : true;
+      },
+      type,
+      message,
+    };
+  }
+);
 
 /* Misc */
 
-export function oneOf(values: any[], type: Type = Type.ERROR, message = messages.oneOf): Validator {
-  return {
-    validator: value => value == null || values.indexOf(value) >= 0,
-    type,
-    message,
-  };
-}
+export const oneOf = memoize(
+  (values: any[], type: Type = Type.ERROR, message = messages.oneOf): Validator => {
+    return {
+      validator: value => value == null || values.indexOf(value) >= 0,
+      type,
+      message,
+    };
+  }
+);
 
-export function email(type: Type = Type.ERROR, message = messages.email): Validator {
+export const email = memoize((type: Type = Type.ERROR, message = messages.email): Validator<
+  string
+> => {
   return {
     validator: value =>
       value == null ||
@@ -130,4 +135,4 @@ export function email(type: Type = Type.ERROR, message = messages.email): Valida
     type,
     message,
   };
-}
+});
