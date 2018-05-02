@@ -24,9 +24,9 @@
   dependencies:
     csstype "^2.2.0"
 
-"@vzh/configs@^0.67.0":
-  version "0.67.0"
-  resolved "https://registry.yarnpkg.com/@vzh/configs/-/configs-0.67.0.tgz#502010093c791de8865ea64d35bbf3d1c7f37503"
+"@vzh/configs@^0.71.0":
+  version "0.71.0"
+  resolved "https://registry.yarnpkg.com/@vzh/configs/-/configs-0.71.0.tgz#c59252e19b01e8c9e075ca57eaf702b8920be329"
 
 ansi-regex@^2.0.0:
   version "2.1.1"
@@ -296,7 +296,7 @@ path-parse@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/path-parse/-/path-parse-1.0.5.tgz#3c1adf871ea9cd6c9431b6ea2bd74a0ff055c4c1"
 
-prettier@^1.6.1:
+prettier@^1.12.1:
   version "1.12.1"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.12.1.tgz#c1ad20e803e7749faf905a409d2367e06bbe7325"
 
