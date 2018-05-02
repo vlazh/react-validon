@@ -108,7 +108,8 @@ export default function validable<P extends Props>() {
         };
       };
 
-      private validateFields = (fieldName: string, value: any): FieldValidationResults => {
+      private validateFields = (fieldName?: string, value?: any): FieldValidationResults => {
+        // if validate only one field with value
         if (fieldName && value !== undefined) {
           return {
             [fieldName]: this.validateField({
@@ -127,7 +128,7 @@ export default function validable<P extends Props>() {
         }, {});
       };
 
-      private validate = (fieldName: string, value: any): boolean => {
+      private validate = (fieldName?: string, value?: any): boolean => {
         const prevState = this.state;
         const result = {
           ...prevState.result,
