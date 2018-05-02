@@ -28,18 +28,16 @@ interface FieldValidationResults {
   [P: string]: ValidationResult;
 }
 
-export interface Props {
-  isValid: boolean;
-  validationResult: ValidationResult;
-  validate: (fieldName: string, value: any) => boolean;
-}
-
 export interface State {
   isValid: boolean;
   result: ValidationResult;
   subscribe: (field: Field) => void;
   unsubscribe: (name: string) => void;
   validate: (fieldName: string, value: any) => boolean;
+}
+
+export interface Props {
+  validation: Pick<State, 'isValid' | 'validate' | 'result'>;
 }
 
 export const ValidableContext = React.createContext<State>({
@@ -153,9 +151,11 @@ export default function validable<P extends Props>() {
           Component,
           /* tslint:disable-next-line:prefer-object-spread */
           Object.assign({}, this.props, {
-            isValid: this.state.isValid,
-            validationResult: this.state.result,
-            validate: this.validate,
+            validation: {
+              isValid: this.state.isValid,
+              result: this.state.result,
+              validate: this.state.validate,
+            },
           })
         );
         return (
@@ -170,14 +170,16 @@ export default function validable<P extends Props>() {
     const wrappedComponent = Validable.wrappedComponent as any;
 
     (wrappedComponent.propTypes as Required<React.ValidationMap<Props>>) = {
-      isValid: PropTypes.bool.isRequired,
-      validationResult: PropTypes.objectOf(
-        PropTypes.shape({
-          error: PropTypes.string,
-          type: typePropTypes,
-        })
-      ).isRequired,
-      validate: PropTypes.func.isRequired,
+      validation: PropTypes.shape({
+        isValid: PropTypes.bool.isRequired,
+        result: PropTypes.objectOf(
+          PropTypes.shape({
+            error: PropTypes.string,
+            type: typePropTypes,
+          })
+        ).isRequired,
+        validate: PropTypes.func.isRequired,
+      }).isRequired,
       ...wrappedComponent.propTypes,
     };
 
