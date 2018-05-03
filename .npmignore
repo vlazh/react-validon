@@ -10,3 +10,4 @@ tslint.json
 yarn.lock
 *.log
 examples/
+docs/
