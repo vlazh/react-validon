@@ -6,6 +6,7 @@
   "scripts": {
     "clean": "rimraf out",
     "build": "npm run clean && webpack --config webpack.config.babel.js",
+    "build:copy": "npm run build && cp -r dist/* ../../docs/",
     "start": "npm run clean && webpack-dev-server --config webpack.config.babel.js"
   },
   "devDependencies": {
