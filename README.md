@@ -4,17 +4,9 @@
 
 **React-validon** is independent of store and can work with [local component state](https://reactjs.org/docs/faq-state.html), [Redux](https://redux.js.org/) and [MobX](https://github.com/mobxjs/mobx).
 
-## Local component state example
+## [Simple demo](https://vlazh.github.io/react-validon/)
 
-```javascript
-// TODO
-```
-
-## Redux example
-
-```javascript
-// TODO
-```
+## [Examples](https://github.com/vlazh/react-validon/tree/master/examples/)
 
 ## License
 
