@@ -3,7 +3,8 @@
     "root": "app",
 
     "output": {
-      "root": ""
+      "root": "",
+      "publicPath": "./"
     }
   }
 }

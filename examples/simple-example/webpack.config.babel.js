@@ -20,4 +20,8 @@ export default webpackMerge(clientConfigJs({ entry: { main: './index' } }), {
       hash: true,
     }),
   ],
+
+  devServer: {
+    publicPath: '/',
+  },
 });
