@@ -4,14 +4,9 @@
   "description": "React validation library",
   "main": "./dist/index.js",
   "types": "dist/index.d.ts",
-  "scripts": {
-    "clean": "rimraf dist/*",
-    "build": "npm run clean && tsc --project ./tsconfig.json",
-    "prepublishOnly": "npm run clean && npm run build",
-    "patch-publish": "npm version patch && npm publish && git push --follow-tags",
-    "minor-publish": "npm version minor && npm publish && git push --follow-tags",
-    "major-publish": "npm version major && npm publish && git push --follow-tags"
-  },
+  "author": "Vladimir Zhukov",
+  "license": "MIT",
+  "homepage": "https://github.com/vlazh/react-validon",
   "repository": {
     "type": "git",
     "url": "https://github.com/vlazh/react-validon"
@@ -30,33 +25,43 @@
       "url": "http://github.com/vlazh"
     }
   ],
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/vlazh/react-validon/issues"
   },
-  "homepage": "https://github.com/vlazh/react-validon",
-  "author": "Vladimir Zhukov",
+  "scripts": {
+    "clean": "rimraf dist/*",
+    "build": "npm run clean && tsc --project ./tsconfig.json",
+    "prepublishOnly": "npm run clean && npm run build",
+    "patch-publish": "npm version patch && npm publish && git push --follow-tags",
+    "minor-publish": "npm version minor && npm publish && git push --follow-tags",
+    "major-publish": "npm version major && npm publish && git push --follow-tags"
+  },
   "devDependencies": {
-    "@types/prop-types": "^15.5.2",
-    "@types/react": "16.3.13",
-    "@vzh/configs": "^0.71.0",
-    "prettier": "^1.12.1",
-    "react": "^16.3.0",
+    "@types/prop-types": "^15.5.6",
+    "@types/react": "16.4.18",
+    "@vzh/configs": "^2.16.1",
+    "babel-eslint": "^10.0.1",
+    "prettier": "^1.14.3",
+    "react": "^16.6.0",
     "rimraf": "^2.6.2",
-    "tslint": "^5.9.1",
-    "tslint-config-prettier": "^1.10.0",
-    "tslint-consistent-codestyle": "^1.13.0",
-    "tslint-eslint-rules": "^5.1.0",
-    "tslint-plugin-prettier": "^1.3.0",
-    "tslint-react": "^3.5.1",
-    "typescript": "^2.8.1"
+    "eslint": "^5.8.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^3.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.2",
+    "eslint-plugin-prettier": "^3.0.0",
+    "eslint-plugin-react": "^7.11.0",
+    "eslint-plugin-typescript": "^0.13.0",
+    "typescript-eslint-parser": "^20.1.1",
+    "webpack-merge": "^4.1.4",
+    "typescript": "^3.1.6"
   },
   "dependencies": {
-    "hoist-non-react-statics": "^2.5.0",
+    "hoist-non-react-statics": "^2.5.5",
     "nano-memoize": "^1.0.0",
-    "prop-types": "^15.6.1"
+    "prop-types": "^15.6.2"
   },
   "peerDependencies": {
-    "react": ">= 16"
+    "react": ">= 16.x"
   }
 }

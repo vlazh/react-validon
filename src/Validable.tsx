@@ -43,15 +43,9 @@ export interface Props {
 export const ValidableContext = React.createContext<State>({
   isValid: true,
   result: {},
-  subscribe: () => {
-    return;
-  },
-  unsubscribe: () => {
-    return;
-  },
-  validate: () => {
-    return true;
-  },
+  subscribe: () => {},
+  unsubscribe: () => {},
+  validate: () => true,
 });
 
 export const typePropTypes = PropTypes.oneOf(['ERROR', 'WARN', 'INFO']);
@@ -66,6 +60,7 @@ export default function validable<P extends Props>() {
         Component.name ||
         (Component.constructor && Component.constructor.name) ||
         'Unknown'})`;
+
       static wrappedComponent = Component;
 
       private fields: Fields = {};

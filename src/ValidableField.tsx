@@ -38,13 +38,15 @@ export default function validableField<P extends Props & ValidableFieldProps>({
         Component.name ||
         (Component.constructor && Component.constructor.name) ||
         'Unknown'})`;
+
       static wrappedComponent = Component;
 
       getValue = () => (getValue ? getValue(this.props) : this.props.value);
 
       getValidators = () => (getValidators ? getValidators(this.props) : this.props.validators);
 
-      componentWillMount() {
+      constructor(props: P) {
+        super(props);
         const { subscribe, name } = this.props;
         subscribe({ name, getValue: this.getValue, getValidators: this.getValidators });
       }

@@ -4,8 +4,7 @@
     "baseUrl": "./src",
     "outDir": "./dist",
     "declaration": true,
-    "sourceMap": false,
-    "lib": ["dom", "es2017"]
+    "sourceMap": false
   },
   "files": ["./src/types.d.ts", "./src/index.ts"]
 }
