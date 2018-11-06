@@ -6,12 +6,7 @@ import paths from '@vzh/configs/paths';
 
 export default webpackMerge(clientConfigJs({ entry: { main: './index' } }), {
   module: {
-    rules: [
-      {
-        test: /\.pug$/,
-        use: { loader: 'pug-loader' },
-      },
-    ],
+    rules: [{ test: /\.pug$/, use: { loader: 'pug-loader' } }],
   },
 
   plugins: [
