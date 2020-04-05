@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import hoistNonReactStatics from 'hoist-non-react-statics';
 import { Validator, Type } from './validators';
 
-export type Validators = Validator | Validator[] | undefined;
+export type Validators = Validator | Validator[];
 
 export interface Field {
   name: string;
@@ -48,7 +49,7 @@ export const ValidableContext = React.createContext<State>({
   validate: () => true,
 });
 
-export const typePropTypes = PropTypes.oneOf(['ERROR', 'WARN', 'INFO']);
+// export const typePropTypes = PropTypes.oneOf(['ERROR', 'WARN', 'INFO']);
 
 /**
  * Provide props isValid, validationResult, validate.
@@ -56,16 +57,11 @@ export const typePropTypes = PropTypes.oneOf(['ERROR', 'WARN', 'INFO']);
 export default function validable<P extends Props>() {
   return <C extends React.ComponentType<P>>(Component: C): C => {
     class Validable extends React.Component<P, State> {
-      static displayName = `${validable.name}(${Component.displayName ||
-        Component.name ||
-        (Component.constructor && Component.constructor.name) ||
-        'Unknown'})`;
-
       static wrappedComponent = Component;
 
       private fields: Fields = {};
 
-      private subscribe = (field: Field) => {
+      private subscribe = (field: Field): void => {
         if (!field.name) {
           console.warn(
             'Validable fields with empty names will be ignored! You must specify unique field name.'
@@ -79,7 +75,7 @@ export default function validable<P extends Props>() {
         this.fields[field.name] = field;
       };
 
-      private unsubscribe = (name: string) => {
+      private unsubscribe = (name: string): void => {
         if (!this.fields[name]) {
           console.warn(`Validable field '${name}' not subscribed!`);
           return;
@@ -87,7 +83,7 @@ export default function validable<P extends Props>() {
         delete this.fields[name];
       };
 
-      private normalizeValidators = (validators: Validators) =>
+      private normalizeValidators = (validators: Validators): Validator[] =>
         !validators || Array.isArray(validators) ? validators : [validators];
 
       private validateField = ({ name, getValue, getValidators }: Field): ValidationResult => {
@@ -95,7 +91,7 @@ export default function validable<P extends Props>() {
         if (!validators) return {};
 
         const value = getValue();
-        const notValid = validators.find(v => !v.validator(value, name));
+        const notValid = validators.find((v) => !v.validator(value, name));
 
         return {
           error: notValid && notValid.message.replace(/{PROP}/, name).replace(/{VALUE}/, value),
@@ -129,55 +125,45 @@ export default function validable<P extends Props>() {
           ...prevState.result,
           ...this.validateFields(fieldName, value),
         };
-        const isValid = Object.getOwnPropertyNames(result).every(name => !result[name].error);
+        const isValid = Object.getOwnPropertyNames(result).every((name) => !result[name].error);
         this.setState({ result, isValid });
         return isValid;
       };
 
+      // eslint-disable-next-line react/state-in-constructor
       state = {
         isValid: true,
         result: {},
+        // eslint-disable-next-line react/no-unused-state
         subscribe: this.subscribe,
+        // eslint-disable-next-line react/no-unused-state
         unsubscribe: this.unsubscribe,
         validate: this.validate,
       };
 
-      render() {
-        const component = React.createElement<P>(
-          Component,
-          /* tslint:disable-next-line:prefer-object-spread */
-          Object.assign({}, this.props, {
-            validation: {
-              isValid: this.state.isValid,
-              result: this.state.result,
-              validate: this.state.validate,
-            },
-          })
-        );
+      render(): JSX.Element {
+        const { isValid, result, validate } = this.state;
+
+        const component = React.createElement<P>(Component, {
+          ...this.props,
+          validation: { isValid, result, validate },
+        });
+
         return (
           <ValidableContext.Provider value={this.state}>{component}</ValidableContext.Provider>
         );
       }
     }
 
+    (Validable as React.ComponentClass<P>).displayName = `${validable.name}(${
+      Component.displayName ||
+      Component.name ||
+      (Component.constructor && Component.constructor.name) ||
+      'Unknown'
+    })`;
+
     // Static fields from Component should be visible on the generated HOC
     hoistNonReactStatics(Validable, Component);
-
-    const wrappedComponent = Validable.wrappedComponent as any;
-
-    (wrappedComponent.propTypes as Required<React.ValidationMap<Props>>) = {
-      validation: PropTypes.shape({
-        isValid: PropTypes.bool.isRequired,
-        result: PropTypes.objectOf(
-          PropTypes.shape({
-            error: PropTypes.string,
-            type: typePropTypes,
-          })
-        ).isRequired,
-        validate: PropTypes.func.isRequired,
-      }).isRequired,
-      ...wrappedComponent.propTypes,
-    };
 
     return Validable as C & ValidableClass<P> & typeof Validable;
   };

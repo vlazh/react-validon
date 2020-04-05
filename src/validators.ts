@@ -18,7 +18,7 @@ const memoize = <T extends any>(fn: T): T => memoizeBase(fn, { vargs: true });
 
 export const required = memoize(
   (type: Type = Type.ERROR, message = messages.required): Validator => ({
-    validator: value => {
+    validator: (value) => {
       if (value == null) {
         return false;
       }
@@ -54,7 +54,7 @@ export const min = memoize(
     type: Type = Type.ERROR,
     message = messages.number.min
   ): Validator<number> => ({
-    validator: value => +value >= +minValue,
+    validator: (value) => +value >= +minValue,
     type,
     message: message.replace(/{MIN}/, minValue.toString()),
   })
@@ -66,7 +66,7 @@ export const max = memoize(
     type: Type = Type.ERROR,
     message = messages.number.max
   ): Validator<number> => ({
-    validator: value => +value <= +maxValue,
+    validator: (value) => +value <= +maxValue,
     type,
     message: message.replace(/{MAX}/, maxValue.toString()),
   })
@@ -80,7 +80,7 @@ export const minLength = memoize(
     type: Type = Type.ERROR,
     message = messages.string.minLength
   ): Validator<string> => ({
-    validator: value => value == null || value.length >= +minValue,
+    validator: (value) => value == null || value.length >= +minValue,
     type,
     message: message.replace(/{MINLENGTH}/, minValue.toString()),
   })
@@ -92,7 +92,7 @@ export const maxLength = memoize(
     type: Type = Type.ERROR,
     message = messages.string.maxLength
   ): Validator<string> => ({
-    validator: value => value == null || value.length <= +maxValue,
+    validator: (value) => value == null || value.length <= +maxValue,
     type,
     message: message.replace(/{MAXLENGTH}/, maxValue.toString()),
   })
@@ -104,7 +104,7 @@ export const match = memoize(
     type: Type = Type.ERROR,
     message = messages.string.match
   ): Validator<string> => ({
-    validator: value => {
+    validator: (value) => {
       if (!regExp) return false;
       return value ? regExp.test(value) : true;
     },
@@ -117,7 +117,7 @@ export const match = memoize(
 
 export const oneOf = memoize(
   (values: any[], type: Type = Type.ERROR, message = messages.oneOf): Validator => ({
-    validator: value => value == null || values.indexOf(value) >= 0,
+    validator: (value) => value == null || values.includes(value),
     type,
     message,
   })
@@ -125,7 +125,7 @@ export const oneOf = memoize(
 
 export const email = memoize(
   (type: Type = Type.ERROR, message = messages.email): Validator<string> => ({
-    validator: value =>
+    validator: (value) =>
       value == null ||
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
         value

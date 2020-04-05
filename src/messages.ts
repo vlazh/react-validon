@@ -1,7 +1,6 @@
 /**
  * Default template variables: {PROP}, {VALUE}
  */
-
 export default {
   type: 'Value must be instance of `{TYPE}`.',
   required: 'Value is required.',
