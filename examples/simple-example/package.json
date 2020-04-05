@@ -6,7 +6,7 @@
   "scripts": {
     "clean": "rimraf dist/*",
     "build": "npm run clean && webpack --config webpack.config.babel.js",
-    "build:gh-pages": "npm run build && cp -r dist/* ../../docs/",
+    "build:gh-pages": "npm run build && rimraf ../../docs/* && cp -r dist/* ../../docs/",
     "start": "webpack-dev-server --config webpack.config.babel.js"
   },
   "devDependencies": {
