@@ -1,13 +1,17 @@
+/** @type {import('eslint').Linter.Config} */
 module.exports = {
+  root: true,
+
   extends: require.resolve('@vzh/configs/eslint/react.eslintrc.js'),
-  settings: {
-    'import/resolver': {
-      node: {
-        moduleDirectory: ['node_modules', './app/src'],
-      },
+
+  parserOptions: {
+    ecmaFeatures: {
+      legacyDecorators: true,
     },
   },
+
   rules: {
     'react/prop-types': 'off',
+    'react/jsx-props-no-spreading': 'off',
   },
 };

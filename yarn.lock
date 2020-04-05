@@ -117,10 +117,10 @@
     semver "^6.3.0"
     tsutils "^3.17.1"
 
-"@vzh/configs@^3.46.1":
-  version "3.46.1"
-  resolved "https://registry.yarnpkg.com/@vzh/configs/-/configs-3.46.1.tgz#5d2d278cd81a7f38d75943ad0dc94c1d78b3b018"
-  integrity sha512-ErFdUIJhD8ipklNl9mFpYhvNku4gEpSSYw1EraJtZYAYf7bqqOzET9CIa73nBLRzLuN88Mvc9sXwtNAhr0nTpg==
+"@vzh/configs@^3.46.2":
+  version "3.46.2"
+  resolved "https://registry.yarnpkg.com/@vzh/configs/-/configs-3.46.2.tgz#68004dfe936c1ecd3bbfee5bfca753a3bb6bf041"
+  integrity sha512-qo87UajPMT7XT5cNZNnSE4pJExQxWSt2IqLKiRsciSbq2vcrXDr3DG6QPYfkRVAYWSAVeY5LosNyzS81Z+ULVw==
 
 acorn-jsx@^5.2.0:
   version "5.2.0"
