@@ -45,7 +45,8 @@
   "dependencies": {
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-validon": "^0.8.0"
+    "react-validon": "^0.8.1",
+    "reflexy": "^3.12.6"
   },
   "prettier": "@vzh/configs/prettier"
 }

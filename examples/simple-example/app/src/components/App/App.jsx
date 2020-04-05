@@ -1,4 +1,5 @@
 import React from 'react';
+import { Flex } from 'reflexy';
 import { validable, required, minLength, Type } from 'react-validon';
 // import { validable, required, minLength, Type } from '../../../../../../dist';
 import Input from 'components/Input';
@@ -26,8 +27,8 @@ export default class App extends React.Component {
     const { name1, name2 } = this.state;
 
     return (
-      <div>
-        <div>
+      <Flex p="xxl" column center>
+        <Flex mt column>
           <div>Name1</div>
           <Input
             name="name1"
@@ -37,9 +38,9 @@ export default class App extends React.Component {
             onChange={this.updateName1}
             validators={[required(), minLength(3, Type.WARN)]}
           />
-        </div>
+        </Flex>
 
-        <div>
+        <Flex mt column>
           <div>Name2</div>
           <Input
             name="name2"
@@ -49,15 +50,23 @@ export default class App extends React.Component {
             onChange={this.updateName2}
             validators={minLength(2)}
           />
-        </div>
+        </Flex>
 
-        <div>Form is valid: {validation.isValid.toString()}</div>
-        <div>Result: {JSON.stringify(validation.result)}</div>
+        <Flex mt>Form is valid: {validation.isValid.toString()}</Flex>
+        <Flex mt column>
+          {Object.entries(validation.result)
+            .filter(([, value]) => value.error)
+            .map(([name, value]) => (
+              <div>
+                {name}: {JSON.stringify(value)}
+              </div>
+            ))}
+        </Flex>
 
-        <button type="button" onClick={this.validate}>
+        <Flex mt component="button" type="button" onClick={this.validate}>
           Validate all
-        </button>
-      </div>
+        </Flex>
+      </Flex>
     );
   }
 }
