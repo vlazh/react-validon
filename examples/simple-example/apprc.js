@@ -13,6 +13,7 @@ module.exports = {
 
     output: {
       root: '',
+      publicPath: './',
 
       assetManifest: {
         fileName: '',
