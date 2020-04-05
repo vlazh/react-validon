@@ -62,19 +62,21 @@ export default function validableField<P extends Props & ValidableFieldProps>({
     // Static fields from Component should be visible on the generated HOC
     hoistNonReactStatics(ValidableField, Component);
 
-    const { subscribe, unsubscribe, validate, result } = useContext(ValidableContext);
+    return (props) => {
+      const { subscribe, unsubscribe, validate, result } = useContext(ValidableContext);
 
-    return (props) => (
-      <ValidableField
-        {...props}
-        subscribe={subscribe}
-        unsubscribe={unsubscribe}
-        validation={{
-          // eslint-disable-next-line react/destructuring-assignment
-          ...result[props.name],
-          validate,
-        }}
-      />
-    );
+      return (
+        <ValidableField
+          {...props}
+          subscribe={subscribe}
+          unsubscribe={unsubscribe}
+          validation={{
+            // eslint-disable-next-line react/destructuring-assignment
+            ...result[props.name],
+            validate,
+          }}
+        />
+      );
+    };
   };
 }
