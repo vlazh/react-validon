@@ -10,7 +10,7 @@ module.exports = {
     },
     {
       exclude: './app',
-      extends: '@vzh/configs/babel/common.babelrc.js',
+      extends: '@vzh/configs/babel/node.babelrc.js',
     },
   ],
 };
