@@ -2,7 +2,7 @@
 module.exports = {
   root: true,
 
-  extends: require.resolve('@vzh/configs/eslint/react.eslintrc.js'),
+  extends: require.resolve('@js-toolkit/configs/eslint/react.eslintrc.js'),
 
   parserOptions: {
     ecmaFeatures: {

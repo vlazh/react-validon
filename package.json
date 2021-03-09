@@ -30,7 +30,7 @@
     "@types/react": "17.0.2",
     "@typescript-eslint/eslint-plugin": "^4.15.2",
     "@typescript-eslint/parser": "^4.15.2",
-    "@vlazh/configs": "^3.73.7",
+    "@js-toolkit/configs": "^3.73.7",
     "eslint": "^7.20.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^8.0.0",
@@ -51,5 +51,5 @@
   "peerDependencies": {
     "react": ">= 16.x"
   },
-  "prettier": "@vlazh/configs/prettier"
+  "prettier": "@js-toolkit/configs/prettier"
 }

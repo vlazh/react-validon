@@ -1,5 +1,5 @@
 {
-  "extends": "./node_modules/@vlazh/configs/js/common.jsconfig.json",
+  "extends": "./node_modules/@js-toolkit/configs/js/common.jsconfig.json",
   "compilerOptions": {
     "baseUrl": "./app/src"
   }

@@ -16,7 +16,7 @@
     "@babel/preset-env": "^7.13.5",
     "@babel/preset-react": "^7.12.13",
     "@babel/register": "^7.13.0",
-    "@vlazh/configs": "^3.73.7",
+    "@js-toolkit/configs": "^3.73.7",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.2.2",
     "css-loader": "^5.0.2",
@@ -48,5 +48,5 @@
     "react-validon": "^0.8.3",
     "reflexy": "^3.32.0"
   },
-  "prettier": "@vlazh/configs/prettier"
+  "prettier": "@js-toolkit/configs/prettier"
 }

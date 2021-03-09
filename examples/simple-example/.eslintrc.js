@@ -1,4 +1,4 @@
 module.exports = {
   root: true,
-  extends: require.resolve('@vzh/configs/eslint/common.eslintrc.js'),
+  extends: require.resolve('@js-toolkit/configs/eslint/common.eslintrc.js'),
 };

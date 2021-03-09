@@ -2,7 +2,7 @@ module.exports = {
   overrides: [
     {
       include: './app',
-      extends: '@vzh/configs/babel/react.babelrc.js',
+      extends: '@js-toolkit/configs/babel/react.babelrc.js',
       plugins: [
         ['@babel/plugin-proposal-decorators', { legacy: true }],
         ['@babel/plugin-proposal-class-properties', { loose: true }],
@@ -10,7 +10,7 @@ module.exports = {
     },
     {
       exclude: './app',
-      extends: '@vzh/configs/babel/node.babelrc.js',
+      extends: '@js-toolkit/configs/babel/node.babelrc.js',
     },
   ],
 };
