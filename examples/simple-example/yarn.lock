@@ -941,6 +941,11 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
+"@js-toolkit/configs@^3.73.7":
+  version "3.77.1"
+  resolved "https://npm.pkg.github.com/download/@js-toolkit/configs/3.77.1/3e2f4c9f540a9c4afaafbdbc0676df056504bf41afc3dd42e3b552801d577d47#57efa0b45248de9e1e941fdcae9e84d7ebdb994f"
+  integrity sha512-+tt+fNWKDHNm4iAehfsOTeVMErqiiY8LMvsZLWN4F59dCboL1go6fulrGMChav/OPUvOnKTsLeC0jNHDYWipmw==
+
 "@types/eslint-scope@^3.7.0":
   version "3.7.0"
   resolved "https://registry.yarnpkg.com/@types/eslint-scope/-/eslint-scope-3.7.0.tgz#4792816e31119ebd506902a482caec4951fabd86"
@@ -999,11 +1004,6 @@
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/@types/parse-json/-/parse-json-4.0.0.tgz#2f8bb441434d163b35fb8ffdccd7138927ffb8c0"
   integrity sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA==
-
-"@vzh/configs@^3.73.7":
-  version "3.73.7"
-  resolved "https://registry.yarnpkg.com/@vzh/configs/-/configs-3.73.7.tgz#e5547d9a0c9356e68f4bc70a5f387d7c52303d82"
-  integrity sha512-Qgx2WzK0c7yy5rlWkfWWQsKjTrN7vv9Myic0vGnvo8K9YgNSmARysOWdwqkxMpqDUVTveOnUmEtoqwyIKtKJbQ==
 
 "@webassemblyjs/ast@1.11.0":
   version "1.11.0"
